@@ -89,18 +89,14 @@
       </div>
     </div>
     
-    <script>
-
-        
-    
-        
-        
-    
+    <script>    
         // Hash table
         let hash = (string,max) => {
+            let hash = 0;
             let firstChar = string.substring(0,1);
             let secondChar = string.substring(1,2);
             hash = string.charCodeAt(firstChar) + string.charCodeAt(secondChar);
+           
             return hash % max;
         };
 
@@ -116,13 +112,7 @@
 
             //Searching through the array
             this.lookup = function(key) {
-                let hash = (string,max) => {
-                let firstChar = string.substring(0,1);
-                let secondChar = string.substring(1,2);
-                hash = string.charCodeAt(firstChar) + string.charCodeAt(secondChar);
-                return hash % max;
-                };
-
+                
                 let index = hash(key, storageLimit);
                 
                 if (storage[index] === undefined){
@@ -138,6 +128,7 @@
 
             //populating the table
             this.add = function(key, value) {
+                
                 let index = hash(key, storageLimit);
                 if (storage[index] === undefined){
                     storage[index] = [
@@ -161,38 +152,16 @@
            
         }
 
-        let instance = new HashTable();
-        function initiate() {
+        phonebook = new HashTable();
 
-            const fname = document.getElementById('fname').value ;
-            console.log(fname);
-            const pnum = document.getElementById('pnum').value;
-            console.log(pnum); 
-            
-            if (fname == '' || pnum == ''){
-                alert ("Please fill the required fields.");
-                return false;
-            }
-
-            instance.add(fname, pnum);
-            console.log(instance.lookup(fname));
+        phonebook.add('Florence', '0503577361');
+        phonebook.add('Adwoa', '0245987431');
+        phonebook.add('Akosua', '0208137827');
+        phonebook.add('Sasha', '0550895954');
+        phonebook.add('Freda', '0361172324');
         
-        }
-
-        function search() {
-            const fname = document.getElementById('fname').value ;
-            console.log(fname);
-
-            if (fname == ''){
-                alert ("Please fill the required fields.");
-                return false;
-            }
-            result = instance.lookup(fname)
-
-            document.getElementById('display').innerHTML = result;
-        }
-
-        
+        console.log(phonebook.lookup('Akosua'));
+        console.log(phonebook.lookup('Sasha'));
 
     </script>
 
