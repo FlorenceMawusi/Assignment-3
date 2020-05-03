@@ -81,15 +81,64 @@
                         value="Search" onclick="search()">
                 </div>
             </form>
-            <p class = "lead" id="display">
+            <br>
+
             
-            </p>
+            <div>
+                <h4><span class = "badge badge-light" id="display" class = "lead"> 
+                </span></h4>
+            </div>
         </div>
 
       </div>
     </div>
     
-    <script>    
+    <script>  
+
+        
+
+        function initiate() {
+
+            
+
+            let instance = new HashTable();
+            const fname = document.getElementById('fname').value ;
+            console.log(fname);
+            const pnum = document.getElementById('pnum').value;
+            console.log(pnum); 
+
+            
+
+            if (fname == '' || pnum == ''){
+                alert ("Please fill the required fields.");
+                return false;
+            }
+            
+            
+
+            instance.add(fname, pnum);
+            console.log(instance.lookup(fname));
+            return instance
+
+        }
+
+        function search() {
+            
+            let instance = initiate();
+            const fname = document.getElementById('fname').value ;
+            console.log(fname);
+    
+            if (fname == ''){
+                alert ("Please fill the required fields.");
+                return false;
+            }
+            result = instance.lookup(fname)
+    
+            document.getElementById('display').innerHTML = result;
+        }
+
+
+    
         // Hash table
         let hash = (string,max) => {
             let hash = 0;
@@ -99,6 +148,7 @@
            
             return hash % max;
         };
+    
 
         // Hash table class
         let HashTable = function (){
@@ -152,6 +202,7 @@
            
         }
 
+        //testing
         phonebook = new HashTable();
 
         phonebook.add('Florence', '0503577361');
